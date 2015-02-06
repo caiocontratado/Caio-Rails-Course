@@ -3,9 +3,14 @@ class PinsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [ :index, :show]
 
+  has_scope :by_user
+
   def index
-    @pins = Pin.all
-  end
+    #@pins = apply_scopes(Pin).all
+    @search = Pin.search(params[:q])
+    @pins = @search.result
+ end
+
 
   def show
   end
