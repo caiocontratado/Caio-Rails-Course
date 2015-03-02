@@ -4,6 +4,8 @@ CaioApp::Application.routes.draw do
   devise_for :users
   root "pages#home"
 
+  get "ziggo" => "pages#ziggo"
+
   get "about" => "pages#about" #create about path
   
   # The priority is based upon order of creation: first created -> highest priority.
