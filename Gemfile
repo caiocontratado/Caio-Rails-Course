@@ -8,6 +8,9 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'devise'
 
+gem 'has_scope'
+
+gem 'ransack'
 
 #Bootstrap Gem
 gem 'bootstrap-sass'
