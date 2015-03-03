@@ -1,59 +1,3 @@
-<script>
-    function hasGetUserMedia() {
-    return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-              navigator.mozGetUserMedia || navigator.msGetUserMedia);
-  	}
-
-  	if (hasGetUserMedia()) {
-  	 alert("it works!");
-    // Good to go!
-  	} else {
-   	 alert('getUserMedia() is not supported in your browser');
-  	}
-
-var errorCallback = function(e) {
-    console.log('Reeeejected!', e);
-  };
-
-  
-  navigator.getUserMedia  = navigator.getUserMedia ||
-                          navigator.webkitGetUserMedia ||
-                          navigator.mozGetUserMedia ||
-                          navigator.msGetUserMedia;
-
-  // Not showing vendor prefixes.
-  navigator.getUserMedia({video: true, audio: true}, function(localMediaStream) {
-    var video = document.querySelector('video');
-    video.src = window.URL.createObjectURL(localMediaStream);
-    webcamstream = localMediaStream;
-    // Note: onloadedmetadata doesn't fire in Chrome when using it with getUserMedia.
-    // See crbug.com/110938.
-    video.onloadedmetadata = function(e) {
-      // Ready to go. Do some stuff.
-    };
-  }, errorCallback);
-
- function startRecording() {
-    streamRecorder = webcamstream.record();
-    setTimeout(stopRecording, 10000);
-}
-function stopRecording() {
-    streamRecorder.getRecordedData(postVideoToServer);
-}
-function postVideoToServer(videoblob) {
-
-    var data = {};
-    data.video = videoblob;
-    data.metadata = 'test metadata';
-    data.action = "upload_video";
-    jQuery.post("http://localhost:3000", data, onUploadSuccess);
-}
-function onUploadSuccess() {
-    alert ('video uploaded');
-}
-
-  </script> 
-
 
 <div class="jumbotron center">
 
@@ -67,9 +11,6 @@ function onUploadSuccess() {
   			</p>
   	  <% end %>	 
 
-  	  <video autoplay>
- 			</video>
- 			  	  <button   onclick = "startRecording();">Gravar</button>
-  	  <button  onclick = "stopRecording();">Parar</button>
+  
   </div>
 
